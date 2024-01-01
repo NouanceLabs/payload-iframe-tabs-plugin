@@ -13,7 +13,7 @@ app.get('/', (_, res) => {
 export const start = async (args?: Partial<InitOptions>) => {
   // Initialize Payload
   await payload.init({
-    secret: process.env.PAYLOAD_SECRET,
+    secret: process.env.PAYLOAD_SECRET!,
     express: app,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
@@ -23,7 +23,7 @@ export const start = async (args?: Partial<InitOptions>) => {
 
   // Add your own express routes here
 
-  app.listen(3000)
+  app.listen(process.env.PORT)
 }
 
 start()

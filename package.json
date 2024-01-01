@@ -1,9 +1,9 @@
 {
-  "name": "@payloadcms/payload-plugin-template",
-  "version": "0.0.0=1",
-  "homepage:": "https://payloadcms.com",
-  "repository": "git@github.com:payloadcms/payload-plugin-template.git",
-  "description": "Blank plugin template for Payload",
+  "name": "@nouance/payload-better-fields-plugin",
+  "version": "1.0.0",
+  "homepage:": "https://github.com/NouanceLabs/payload-iframe-tabs-plugin",
+  "repository": "git@github.com:NouanceLabs/payload-iframe-tabs-plugin.git",
+  "description": "A plugin that easily allows you add iframes into separate tabs in the admin panel",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "keywords": [
@@ -22,15 +22,17 @@
     "clean": "rimraf dist && rimraf dev/yarn.lock",
     "prepublishOnly": "yarn clean && yarn build && cd dev && yarn test"
   },
-  "author": "dev@payloadcms.com",
+  "author": "dev@nouance.io",
   "license": "MIT",
   "peerDependencies": {
     "payload": "^2.0.0"
   },
   "devDependencies": {
+    "@payloadcms/bundler-webpack": "^1.0.5",
     "@payloadcms/eslint-config": "^0.0.1",
     "@swc/jest": "^0.2.28",
     "@types/jest": "^29.5.11",
+    "@types/react": "^18.2.46",
     "@typescript-eslint/eslint-plugin": "5.12.1",
     "@typescript-eslint/parser": "5.12.1",
     "dotenv": "^8.2.0",
@@ -40,9 +42,9 @@
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^29.7.0",
-    "payload": "^2.0.14",
+    "payload": "^2.5.0",
     "prettier": "^2.7.1",
-    "react": "^18.0.0",
-    "typescript": "^4.8.4"
+    "react": "^18.2.0",
+    "typescript": "^5.3.3"
   }
 }
