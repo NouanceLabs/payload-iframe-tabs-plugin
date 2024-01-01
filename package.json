@@ -1,6 +1,6 @@
 {
   "name": "@nouance/payload-iframe-tabs-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage:": "https://github.com/NouanceLabs/payload-iframe-tabs-plugin",
   "repository": "git@github.com:NouanceLabs/payload-iframe-tabs-plugin.git",
   "description": "A plugin that easily allows you add iframes into separate tabs in the admin panel",
