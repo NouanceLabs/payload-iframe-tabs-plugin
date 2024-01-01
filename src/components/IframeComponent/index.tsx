@@ -40,6 +40,12 @@ const IframeComponent: React.FC<AdminViewProps> = ({ user }) => {
           }
         })
       } else if (global) {
+        Object.entries(global.custom['iframesTabPlugin'])?.forEach(([key, value]) => {
+          if (pathname.includes(key)) {
+            // @ts-expect-error
+            setTab(value)
+          }
+        })
       }
     }
   }, [])

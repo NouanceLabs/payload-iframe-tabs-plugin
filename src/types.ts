@@ -60,7 +60,8 @@ export interface PluginTypes {
    * @default false
    */
   enabled?: boolean
-  collections: CollectionTabConfig[]
+  collections?: CollectionTabConfig[]
+  globals?: CollectionTabConfig[]
 }
 
 export interface NewCollectionTypes {

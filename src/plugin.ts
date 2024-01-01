@@ -3,15 +3,14 @@ import type { Config, Plugin } from 'payload/config'
 import type { PluginTypes } from './types'
 import { extendWebpackConfig } from './webpack'
 import IframeComponent from './components/IframeComponent'
-import type { CollectionConfig } from 'payload/dist/exports/types'
+import type { CollectionConfig, GlobalConfig } from 'payload/dist/exports/types'
 
 export const iframeTabsPlugin =
   (pluginOptions: PluginTypes): Plugin =>
   incomingConfig => {
     let config = { ...incomingConfig }
-    const { collections } = config
+    const { collections, globals } = config
 
-    // If you need to add a webpack alias, use this function to extend the webpack config
     const webpack = extendWebpackConfig(incomingConfig)
 
     config.admin = {
@@ -84,6 +83,69 @@ export const iframeTabsPlugin =
               }
 
               return collection
+            })
+          : []),
+      ],
+
+      globals: [
+        ...(globals
+          ? globals.map(global => {
+              const targetGlobal = pluginOptions.globals?.find(pluginGlobal => {
+                if (pluginGlobal.slug === global.slug) return true
+                return false
+              })
+
+              if (targetGlobal) {
+                const tabs = {}
+                const customProps = {}
+
+                targetGlobal.tabs.forEach(tab => {
+                  Object.assign(tabs, {
+                    [tab.name]: {
+                      Component: IframeComponent,
+                      path: tab.path,
+                      Tab: {
+                        label: tab.label,
+                        href: tab.path,
+                      },
+                    },
+                  })
+
+                  Object.assign(customProps, {
+                    [tab.path]: {
+                      ...tab,
+                    },
+                  })
+                })
+
+                const globalConfigWithHooks: GlobalConfig = {
+                  ...global,
+                  admin: {
+                    ...global.admin,
+                    components: {
+                      ...global.admin?.components,
+                      views: {
+                        ...global.admin?.components?.views,
+                        // @ts-expect-error
+                        Edit: {
+                          ...global.admin?.components?.views?.Edit,
+                          ...tabs,
+                        },
+                      },
+                    },
+                  },
+                  custom: {
+                    ...global.custom,
+                    iframesTabPlugin: {
+                      ...customProps,
+                    },
+                  },
+                }
+
+                return globalConfigWithHooks
+              }
+
+              return global
             })
           : []),
       ],

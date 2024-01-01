@@ -2,6 +2,7 @@ import { buildConfig } from 'payload/config'
 import path from 'path'
 import Users from './collections/Users'
 import Examples from './collections/Examples'
+import Homepage from './globals/Homepage'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { slateEditor } from '@payloadcms/richtext-slate'
@@ -31,6 +32,7 @@ export default buildConfig({
   },
   editor: slateEditor({}),
   collections: [Examples, Users],
+  globals: [Homepage],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
@@ -40,6 +42,25 @@ export default buildConfig({
   plugins: [
     iframeTabsPlugin({
       enabled: true,
+      globals: [
+        {
+          slug: 'Homepage',
+          tabs: [
+            {
+              name: 'Spongebob',
+              label: 'Spongebob',
+              path: '/spongebob',
+              src: 'https://www.youtube.com/embed/hzond0fF4MM',
+              iframeProps: {
+                height: 1080,
+                width: 1920,
+                frameBorder: '0',
+                style: { aspectRatio: '19/10', maxWidth: '100%', height: 'auto' },
+              },
+            },
+          ],
+        },
+      ],
       collections: [
         {
           slug: 'examples',
