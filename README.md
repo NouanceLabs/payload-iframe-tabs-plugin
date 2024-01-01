@@ -2,7 +2,7 @@
 
 A plugin that easily allows you add iframes into separate tabs in the admin panel.
 
-gif goes here
+![iframe tabs plugin showcase](https://s3.madewithpayload.com/iframepluginshowcase.gif)
 
 ## Installation
 
